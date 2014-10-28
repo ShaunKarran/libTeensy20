@@ -4,6 +4,8 @@
  *	Created:		October 2014
  */
 
+#include <stdint.h>
+
 #ifndef _lcd_5110_h
 #define _lcd_5110_h
 
@@ -46,7 +48,7 @@ void lcd_print_char(unsigned char character);
 
 void lcd_print_str(unsigned char* str);
 
-void lcd_print_int(int16_t value);
+void lcd_print_int(int32_t value);
 
 void lcd_print_double(double value);
 

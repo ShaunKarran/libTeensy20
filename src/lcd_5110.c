@@ -25,15 +25,16 @@ void lcd_init(unsigned char contrast) {
     set_bit(PORTB, LCD_RST);
     set_bit(PORTD, LCD_SCE);
 
-    lcd_write_byte(LCD_COMMAND, CMD_EXT_INST); // H to 1 to use extended intruction set
-    lcd_write_byte(LCD_COMMAND, 0x80 | contrast); // Set Vop
-    lcd_write_byte(LCD_COMMAND, CMD_TMP_CTRL); // Set Temp Coefficient
-    lcd_write_byte(LCD_COMMAND, CMD_BIAS); // LCD Bias
+    lcd_write_byte(LCD_CMD, CMD_EXT_INST); // H to 1 to use extended intruction set
+    lcd_write_byte(LCD_CMD, 0x80 | contrast); // Set Vop
+    lcd_write_byte(LCD_CMD, CMD_TMP_CTRL); // Set Temp Coefficient
+    lcd_write_byte(LCD_CMD, CMD_BIAS); // LCD Bias
 
-    lcd_write_byte(LCD_COMMAND, CMD_BASIC_INST); // H to 0 to use normal intructions
-    lcd_write_byte(LCD_COMMAND, CMD_DISP_NORM); // Set Display control
+    lcd_write_byte(LCD_CMD, CMD_BASIC_INST); // H to 0 to use normal intructions
+    lcd_write_byte(LCD_CMD, CMD_DISP_NORM); // Set Display control
 
     lcd_goto(0, 0);
+    lcd_clear();
 }
 
 void lcd_clear(void) {
@@ -45,8 +46,8 @@ void lcd_clear(void) {
 
 void lcd_goto(uint8_t x, uint8_t y) {
 
-	lcd_write_byte(LCD_COMMAND, 0x40 | y);
-    lcd_write_byte(LCD_COMMAND, 0x80 | x);
+	lcd_write_byte(LCD_CMD, 0x40 | y);
+    lcd_write_byte(LCD_CMD, 0x80 | x);
 }
 
 void lcd_write_byte(unsigned char dc, unsigned char data) {
@@ -55,21 +56,21 @@ void lcd_write_byte(unsigned char dc, unsigned char data) {
     if (dc) {
         set_bit(PORTB, LCD_DC);
     } else {
-        clear_bit(PORTB, LCD_DC);
+        clr_bit(PORTB, LCD_DC);
     }
 
     // Set SCE LOW for sending of data
-    clear_bit(PORTD, LCD_SCE);
+    clr_bit(PORTD, LCD_SCE);
 
     // Send data to SDIN starting from MSB
     for (int i = 7; i >= 0; i--) {
 
-        clear_bit(PORTF, LCD_SCLK);
+        clr_bit(PORTF, LCD_SCLK);
 
         if (get_bit(data, i)) {
             set_bit(PORTB, LCD_SDIN);
         } else {
-            clear_bit(PORTB, LCD_SDIN);
+            clr_bit(PORTB, LCD_SDIN);
         }
 
         set_bit(PORTF, LCD_SCLK);
@@ -92,15 +93,15 @@ void lcd_print_str(unsigned char* str) {
 	int i = 0;
     
     while (str[i] != '\0') {
-        LCD_write_char(str[i]);
+        lcd_print_char(str[i]);
         i++;
     }
 }
 
-void lcd_print_int(int16_t value) {
-	char string[6];
-    sprintf(string, "%d", value);
-    lcd_write_string(string);
+void lcd_print_int(int32_t value) {
+	char string[11];
+    sprintf(string, "%ld", value);
+    lcd_print_str(string);
 }
 
 void lcd_print_double(double value) {
