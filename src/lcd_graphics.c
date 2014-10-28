@@ -1,5 +1,5 @@
 /*	Library:		libTeensy20
- *	Purpose:		Reading digital input
+ *	Purpose:		Graphics for Nokia 5110 LCD
  *	Author(s):		Shaun Karran
  *	Created:		October 2014
  */

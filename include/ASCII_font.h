@@ -1,5 +1,11 @@
-#ifndef ASCII_FONT_H
-#define ASCII_FONT_H
+/*  Library:        libTeensy20
+ *  Purpose:        ASCII font tables
+ *  Author(s):      Unknown, Shaun Karran
+ *  Created:        October 2014
+ */
+
+#ifndef _ASCII_FONT_H
+#define _ASCII_FONT_H
 
 //This table contains the hex values that represent pixels
 //for a font that is 5 pixels wide and 8 pixels high
@@ -102,4 +108,4 @@ static const unsigned char ASCII[][5] = {
     ,{0x78, 0x46, 0x41, 0x46, 0x78} // 7f DEL
 };
 
-#endif //ASCII_FONT_H
+#endif //_ASCII_FONT_H
