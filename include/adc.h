@@ -18,6 +18,7 @@
 #define ADC_250KHZ 6
 #define ADC_125KHZ 7
 
+// ADC modes of operation.
 #define ADC_MODE_8_BIT 0
 #define ADC_MODE_10_BIT 1
 

@@ -94,5 +94,5 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, uns
 }
 
 void gfx_draw_sprite(unsigned char x, unsigned char y, unsigned char* buffer) {
-
+	// TODO
 }
