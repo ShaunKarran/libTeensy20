@@ -111,6 +111,8 @@ void lcd_display_buffer(unsigned char* buffer) {
     for (int i = 0; i < LCD_BUFFER_SIZE; i++) {
         lcd_write_byte(LCD_DATA, buffer[i]);
     }
+
+    lcd_clear_buffer(buffer);
 }
 
 void lcd_clear_buffer(unsigned char* buffer) {
