@@ -12,8 +12,9 @@
 #include "../include/bitwise.h"
 #include "../include/ASCII_font.h"
 
-void lcd_init(unsigned char contrast) {
+unsigned char lcdBuffer[LCD_BUFFER_SIZE];
 
+void lcd_init(unsigned char contrast) {
 	// Setup LCD pins for output
     set_output(DDRF, LCD_SCLK);
     set_output(DDRB, LCD_SDIN);
@@ -39,20 +40,17 @@ void lcd_init(unsigned char contrast) {
 }
 
 void lcd_clear(void) {
-
 	for (int i = 0; i < (LCD_X * LCD_Y / 8); i++) {
         lcd_write_byte(LCD_DATA, 0x00);
     }
 }
 
 void lcd_goto(uint8_t x, uint8_t y) {
-
 	lcd_write_byte(LCD_CMD, 0x40 | y);
     lcd_write_byte(LCD_CMD, 0x80 | x);
 }
 
 void lcd_write_byte(unsigned char dc, unsigned char data) {
-
     // Tell the LCD that we are writing either to data or a command
     if (dc) {
         set_bit(PORTB, LCD_DC);
@@ -81,20 +79,18 @@ void lcd_write_byte(unsigned char dc, unsigned char data) {
     set_bit(PORTD, LCD_SCE);
 }
 
-void lcd_print_char(unsigned char character) {
-
+void lcd_print_char(char character) {
 	for (int i = 0; i < 5; i++) {
         lcd_write_byte(LCD_DATA, pgm_read_byte(&ASCII[character - 0x20][i])); // Might need extra set of brackets.
     }
     lcd_write_byte(LCD_DATA, 0x00); // Empty line between characters.
 }
 
-void lcd_print_str(unsigned char* str) {
-
+void lcd_print_str(char* string) {
 	int i = 0;
     
-    while (str[i] != '\0') {
-        lcd_print_char(str[i]);
+    while (string[i] != '\0') {
+        lcd_print_char(string[i]);
         i++;
     }
 }
@@ -107,4 +103,18 @@ void lcd_print_int(int32_t value) {
 
 void lcd_print_double(double value) {
 	// TODO
+}
+
+void lcd_display_buffer(unsigned char* buffer) {
+    lcd_goto(0, 0);
+
+    for (int i = 0; i < LCD_BUFFER_SIZE; i++) {
+        lcd_write_byte(LCD_DATA, buffer[i]);
+    }
+}
+
+void lcd_clear_buffer(unsigned char* buffer) {
+    for (int i = 0; i < LCD_BUFFER_SIZE; i++) {
+        buffer[i] = 0;
+    }
 }

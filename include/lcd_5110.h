@@ -36,6 +36,11 @@
 #define LCD_DATA 1
 #define LCD_CMD 0
 
+// LCD Buffer
+#define LCD_BUFFER_SIZE (LCD_PIXELS / 8)
+
+extern unsigned char lcdBuffer[LCD_BUFFER_SIZE];
+
 void lcd_init(unsigned char contrast);
 
 void lcd_clear(void);
@@ -44,12 +49,16 @@ void lcd_goto(uint8_t x, uint8_t y);
 
 void lcd_write_byte(unsigned char dc, unsigned char data);
 
-void lcd_print_char(unsigned char character);
+void lcd_print_char(char character);
 
-void lcd_print_str(unsigned char* str);
+void lcd_print_str(char* string);
 
 void lcd_print_int(int32_t value);
 
 void lcd_print_double(double value);
+
+void lcd_display_buffer(unsigned char* buffer);
+
+void lcd_clear_buffer(unsigned char* buffer);
 
 #endif // _lcd_5110_h
