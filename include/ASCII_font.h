@@ -4,12 +4,14 @@
  *  Created:        October 2014
  */
 
+#include <avr/pgmspace.h>
+
 #ifndef _ASCII_FONT_H
 #define _ASCII_FONT_H
 
 //This table contains the hex values that represent pixels
 //for a font that is 5 pixels wide and 8 pixels high
-static const unsigned char ASCII[][5] = {
+static const unsigned char ASCII[][5] PROGMEM = {
      {0x00, 0x00, 0x00, 0x00, 0x00} // 20  
     ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
     ,{0x00, 0x07, 0x00, 0x07, 0x00} // 22 "
