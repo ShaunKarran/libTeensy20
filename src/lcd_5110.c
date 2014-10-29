@@ -2,7 +2,7 @@
  *	Purpose:		Drive Nokia 5110 LCD
  *	Author(s):		Shaun Karran
  *	Created:		October 2014
- */
+*/
 
 #include <avr/io.h>
 #include <avr/pgmspace.h>
@@ -45,7 +45,7 @@ void lcd_clear(void) {
     }
 }
 
-void lcd_goto(uint8_t x, uint8_t y) {
+void lcd_goto(unsigned char x, unsigned char y) {
 	lcd_write_byte(LCD_CMD, 0x40 | y);
     lcd_write_byte(LCD_CMD, 0x80 | x);
 }
@@ -101,7 +101,7 @@ void lcd_print_int(int32_t value) {
     lcd_print_str(string);
 }
 
-void lcd_print_double(double value) {
+void lcd_print_float(float value) {
 	// TODO
 }
 

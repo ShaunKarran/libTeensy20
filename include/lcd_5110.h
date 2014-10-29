@@ -2,7 +2,7 @@
  *	Purpose:		Drive Nokia 5110 LCD
  *	Author(s):		Shaun Karran
  *	Created:		October 2014
- */
+*/
 
 #include <stdint.h>
 
@@ -41,24 +41,112 @@
 
 extern unsigned char lcdBuffer[LCD_BUFFER_SIZE];
 
+/*
+ * Initialises the LCD display. Sets up the pins connected to the display and sets
+ * initial settings for the display.
+ *
+ * @param unsigned char contrast
+ *      Contrast setting of display.
+ *      Can be LCD_LOW_CONTRAST or LCD_Default_CONTRAST or LCD_HIGH_CONTRAST
+ *
+ * @return void
+*/
 void lcd_init(unsigned char contrast);
 
+/*
+ * Clears the display by writing 0's to all pixels.
+ *
+ * @return void
+*/
 void lcd_clear(void);
 
-void lcd_goto(uint8_t x, uint8_t y);
+/*
+ * Moves the LCDs built in cursor to the defined position.
+ *
+ * @param unsigned char x
+ *      Horizontal position of the cursor. Range: 0 to 83
+ *
+ * @param unsigned char y
+ *      Vertial position of the cursor. Range: 0 to 5
+ *
+ * @return void
+*/
+void lcd_goto(unsigned char x, unsigned char y);
 
+/*
+ * Writes a byte of data to the screen.
+ *
+ * @param unsigned char dc
+ *      Define if sending data or command.
+ *		Can be LCD_DATA or LCD_CMD
+ *
+ * @param unsigned char data
+ *      Data to be sent.
+ *		If dc == LCD_DATA then pixels will be written in a vertial line at the current position
+ *		of the LCDs cursor. The cursor will automatically move to the next position on completion.
+ *
+ * @return void
+*/
 void lcd_write_byte(unsigned char dc, unsigned char data);
 
+/*
+ * Prints an ASCII character to the display at the cursors current location.
+ *
+ * @param unsigned char character
+ *      Character to be printed on the display. Must be a printable ASCII character.
+ *
+ * @return void
+*/
 void lcd_print_char(char character);
 
+/*
+ * Prints a string to the display at the cursors current location.
+ *
+ * @param unsigned char* string
+ *      Char array to be printed to the display. Must contain printble ASCII characters.
+ *
+ * @return void
+*/
 void lcd_print_str(char* string);
 
+/*
+ * Prints a long int to the display at the cursors current location.
+ *
+ * @param int32_t value
+ *      Int to be printed on the display. Range: –2,147,483,648 to 2,147,483,647
+ *
+ * @return void
+*/
 void lcd_print_int(int32_t value);
 
-void lcd_print_double(double value);
+/*
+ * Prints a float to the display at the cursors current location.
+ *
+ * @param float value
+ *      float to be printed on the display. Range: 3.4E +/- 38 (7 digits)
+ *
+ * @return void
+*/
+void lcd_print_float(float value);
 
+/*
+ * Sends the contents of the buffer to the display and clears the buffer.
+ *
+ * @param unsigned char* buffer
+ *      Buffer to be displayed and then cleared.
+ *
+ * @return void
+*/
 void lcd_display_buffer(unsigned char* buffer);
 
+/*
+ * Clears the buffer by writing all 0's.
+ *
+ * @param unsigned char* buffer
+ *      Buffer to be cleared.
+ *
+ * @return void
+*/
 void lcd_clear_buffer(unsigned char* buffer);
 
 #endif // _lcd_5110_h
