@@ -1,17 +1,17 @@
 /*  Library:        libTeensy20
  *  Purpose:        ASCII font tables
- *  Author(s):      Unknown, Shaun Karran
+ *  Author(s):      Shaun Karran
  *  Created:        October 2014
  */
 
+// Includes -------------------------------------------------------------------
 #include <avr/pgmspace.h>
 
-#ifndef _ASCII_FONT_H
-#define _ASCII_FONT_H
+#include "../include/ASCII_lib.h"
 
 //This table contains the hex values that represent pixels
 //for a font that is 5 pixels wide and 8 pixels high
-static const unsigned char ASCII[][5] PROGMEM = {
+const unsigned char ASCII[][5] PROGMEM = {
      {0x00, 0x00, 0x00, 0x00, 0x00} // 20  
     ,{0x00, 0x00, 0x5f, 0x00, 0x00} // 21 !
     ,{0x00, 0x07, 0x00, 0x07, 0x00} // 22 "
@@ -109,5 +109,3 @@ static const unsigned char ASCII[][5] PROGMEM = {
     ,{0x10, 0x08, 0x08, 0x10, 0x08} // 7e ~
     ,{0x78, 0x46, 0x41, 0x46, 0x78} // 7f DEL
 };
-
-#endif //_ASCII_FONT_H
