@@ -5,9 +5,11 @@
  */
 
 // Includes -------------------------------------------------------------------
+#include <avr/io.h>
 #include <stdint.h>
 
 #include "../include/timer.h"
+#include "../include/bitwise.h"
 
 /*
  * Enable timer0 with overflow interrupt
@@ -20,7 +22,7 @@
 void timer0_ovf(unsigned char prescaler) {
     TCCR0B |= prescaler;
     TCNT0 = 0; // Start timer at 0.
-    SET_BIT(TIMSK0, TOIE0); // Enable overflow interrupt.
+    set_bit(TIMSK0, TOIE0); // Enable overflow interrupt.
 }
 
 /*
@@ -87,13 +89,13 @@ void timer0_freq_ms(uint16_t ms, unsigned char ocr) {
 void timer1_ovf(unsigned char prescaler) {
 	TCCR1B |= prescaler;
     TCNT1 = 0; // Start timer at 0.
-    SET_BIT(TIMSK1, TOIE1); // Enable overflow interrupt.
+    set_bit(TIMSK1, TOIE1); // Enable overflow interrupt.
 }
 
 void timer3_ovf(unsigned char prescaler) {
     TCCR3B |= prescaler;
     TCNT3 = 0; // Start timer at 0.
-    SET_BIT(TIMSK3, TOIE3); // Enable overflow interrupt.
+    set_bit(TIMSK3, TOIE3); // Enable overflow interrupt.
 }
 
 /*

@@ -20,10 +20,22 @@
 #define TIMER_OCR_C 2
 
 // Function Prototypes --------------------------------------------------------
+void timer0_ovf_init(unsigned char prescaler);
+
+void timer0_freq_Hz(uint32_t hz, unsigned char ocr);
+
+void timer0_freq_ms(uint16_t ms, unsigned char ocr);
+
 void timer1_ovf_init(unsigned char prescaler);
+
+void timer3_ovf_init(unsigned char prescaler);
 
 void timer1_freq_Hz(uint32_t hz, unsigned char ocr);
 
+void timer3_freq_Hz(uint32_t hz, unsigned char ocr);
+
 void timer1_freq_ms(uint16_t ms, unsigned char ocr);
+
+void timer3_freq_ms(uint16_t ms, unsigned char ocr);
 
 #endif // _timer_h
