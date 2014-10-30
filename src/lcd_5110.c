@@ -142,7 +142,7 @@ void lcd_write_byte(unsigned char dc, unsigned char data) {
 */
 void lcd_print_char(char character) {
 	for (int i = 0; i < 5; i++) {
-        lcd_write_byte(LCD_DATA, pgm_read_byte(&ASCII[character - 0x20][i])); // Might need extra set of brackets.
+        lcd_write_byte(LCD_DATA, pgm_read_byte(&ASCII[character - 0x20][i]));
     }
     lcd_write_byte(LCD_DATA, 0x00); // Empty line between characters.
 }
