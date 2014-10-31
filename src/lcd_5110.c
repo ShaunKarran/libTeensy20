@@ -24,7 +24,8 @@ unsigned char lcdBuffer[LCD_BUFFER_SIZE];
  *
  * @return void
 */
-static void lcd_config(void) {
+static void lcd_config(void) 
+{
     // Setup LCD pins for output
     set_output(DDRF, LCD_SCLK);
     set_output(DDRB, LCD_SDIN);
@@ -47,7 +48,8 @@ static void lcd_config(void) {
  *
  * @return void
 */
-void lcd_init(unsigned char contrast) {
+void lcd_init(unsigned char contrast) 
+{
     lcd_config();
 
     lcd_write_byte(LCD_CMD, CMD_EXT_SET); // H to 1 to use extended intruction set
@@ -67,8 +69,10 @@ void lcd_init(unsigned char contrast) {
  *
  * @return void
 */
-void lcd_clear(void) {
-	for (int i = 0; i < (LCD_X * LCD_Y / 8); i++) {
+void lcd_clear(void) 
+{
+	for (int i = 0; i < (LCD_X * LCD_Y / 8); i++) 
+    {
         lcd_write_byte(LCD_DATA, 0x00);
     }
 }
@@ -84,7 +88,8 @@ void lcd_clear(void) {
  *
  * @return void
 */
-void lcd_goto(unsigned char x, unsigned char y) {
+void lcd_goto(unsigned char x, unsigned char y) 
+{
 	lcd_write_byte(LCD_CMD, 0x40 | y);
     lcd_write_byte(LCD_CMD, 0x80 | x);
 }
@@ -103,9 +108,11 @@ void lcd_goto(unsigned char x, unsigned char y) {
  *
  * @return void
 */
-void lcd_write_byte(unsigned char dc, unsigned char data) {
+void lcd_write_byte(unsigned char dc, unsigned char data) 
+{
     // Tell the LCD that we are writing either to data or a command
-    if (dc) {
+    if (dc) 
+    {
         set_bit(PORTB, LCD_DC);
     } else {
         clr_bit(PORTB, LCD_DC);
@@ -115,11 +122,13 @@ void lcd_write_byte(unsigned char dc, unsigned char data) {
     clr_bit(PORTD, LCD_SCE);
 
     // Send data to SDIN starting from MSB
-    for (int i = 7; i >= 0; i--) {
+    for (int i = 7; i >= 0; i--) 
+    {
 
         clr_bit(PORTF, LCD_SCLK);
 
-        if (get_bit(data, i)) {
+        if (get_bit(data, i)) 
+        {
             set_bit(PORTB, LCD_SDIN);
         } else {
             clr_bit(PORTB, LCD_SDIN);
@@ -140,8 +149,10 @@ void lcd_write_byte(unsigned char dc, unsigned char data) {
  *
  * @return void
 */
-void lcd_print_char(char character) {
-	for (int i = 0; i < 5; i++) {
+void lcd_print_char(char character) 
+{
+	for (int i = 0; i < 5; i++) 
+    {
         lcd_write_byte(LCD_DATA, pgm_read_byte(&ASCII[character - 0x20][i]));
     }
     lcd_write_byte(LCD_DATA, 0x00); // Empty line between characters.
@@ -155,10 +166,12 @@ void lcd_print_char(char character) {
  *
  * @return void
 */
-void lcd_print_str(char* string) {
+void lcd_print_str(char* string) 
+{
 	int i = 0;
     
-    while (string[i] != '\0') {
+    while (string[i] != '\0') 
+    {
         lcd_print_char(string[i]);
         i++;
     }
@@ -172,7 +185,8 @@ void lcd_print_str(char* string) {
  *
  * @return void
 */
-void lcd_print_int(int32_t value) {
+void lcd_print_int(int32_t value) 
+{
 	char string[11];
     sprintf(string, "%ld", value);
     lcd_print_str(string);
@@ -186,7 +200,8 @@ void lcd_print_int(int32_t value) {
  *
  * @return void
 */
-void lcd_print_float(float value) {
+void lcd_print_float(float value) 
+{
 	// TODO
 }
 
@@ -198,10 +213,12 @@ void lcd_print_float(float value) {
  *
  * @return void
 */
-void lcd_display_buffer(unsigned char* buffer) {
+void lcd_display_buffer(unsigned char* buffer) 
+{
     lcd_goto(0, 0);
 
-    for (int i = 0; i < LCD_BUFFER_SIZE; i++) {
+    for (int i = 0; i < LCD_BUFFER_SIZE; i++) 
+    {
         lcd_write_byte(LCD_DATA, buffer[i]);
     }
 
@@ -216,8 +233,10 @@ void lcd_display_buffer(unsigned char* buffer) {
  *
  * @return void
 */
-void lcd_clear_buffer(unsigned char* buffer) {
-    for (int i = 0; i < LCD_BUFFER_SIZE; i++) {
+void lcd_clear_buffer(unsigned char* buffer) 
+{
+    for (int i = 0; i < LCD_BUFFER_SIZE; i++) 
+    {
         buffer[i] = 0;
     }
 }
