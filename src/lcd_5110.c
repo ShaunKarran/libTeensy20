@@ -114,7 +114,8 @@ void lcd_write_byte(unsigned char dc, unsigned char data)
     if (dc) 
     {
         set_bit(PORTB, LCD_DC);
-    } else {
+    } else 
+    {
         clr_bit(PORTB, LCD_DC);
     }
 
@@ -130,7 +131,8 @@ void lcd_write_byte(unsigned char dc, unsigned char data)
         if (get_bit(data, i)) 
         {
             set_bit(PORTB, LCD_SDIN);
-        } else {
+        } else 
+        {
             clr_bit(PORTB, LCD_SDIN);
         }
 
