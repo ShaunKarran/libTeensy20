@@ -19,7 +19,8 @@
  *
  * @return void
 */
-void timer0_ovf(unsigned char prescaler) {
+void timer0_ovf(unsigned char prescaler) 
+{
     TCCR0B |= prescaler;
     TCNT0 = 0; // Start timer at 0.
     set_bit(TIMSK0, TOIE0); // Enable overflow interrupt.
@@ -36,12 +37,14 @@ void timer0_ovf(unsigned char prescaler) {
  *
  * @return void
 */
-void timer0_freq_Hz(uint32_t hz, unsigned char ocr) {
+void timer0_freq_Hz(uint32_t hz, unsigned char ocr) 
+{
     uint32_t ocrValue;
     int prescale[] = { 1, 8, 64, 256, 1024};
     int i = 0;
 
-    do {
+    do 
+    {
         // ocr = (clk / (prescale * desiredFreq)) - 1
         ocrValue = (16000000 / (prescale[i] * hz)) - 1;
         i++;
@@ -50,11 +53,13 @@ void timer0_freq_Hz(uint32_t hz, unsigned char ocr) {
     TCCR0B |= i; // Set prescaler.
     set_bit(TCCR0A, WGM01); // Set CTC mode.
 
-    if (ocr == TIMER_OCR_A) {
+    if (ocr == TIMER_OCR_A) 
+    {
         OCR0A = ocrValue; // Set compare A value.
         set_bit(TIMSK0, OCIE0A); // Enable compare A interrupt.
 
-    } else if (ocr == TIMER_OCR_B) {
+    } else if (ocr == TIMER_OCR_B) 
+    {
         OCR0B = ocrValue; // Set compare A value.
         set_bit(TIMSK0, OCIE0B); // Enable compare B interrupt.
     }
@@ -71,7 +76,8 @@ void timer0_freq_Hz(uint32_t hz, unsigned char ocr) {
  *
  * @return void
 */
-void timer0_freq_ms(uint16_t ms, unsigned char ocr) {
+void timer0_freq_ms(uint16_t ms, unsigned char ocr) 
+{
     uint16_t s = ms / 1000; // Interval in seconds
     uint32_t hz = 1 / s; // freq = 1 / period
 
@@ -86,13 +92,15 @@ void timer0_freq_ms(uint16_t ms, unsigned char ocr) {
  *
  * @return void
 */
-void timer1_ovf(unsigned char prescaler) {
+void timer1_ovf(unsigned char prescaler) 
+{
 	TCCR1B |= prescaler;
     TCNT1 = 0; // Start timer at 0.
     set_bit(TIMSK1, TOIE1); // Enable overflow interrupt.
 }
 
-void timer3_ovf(unsigned char prescaler) {
+void timer3_ovf(unsigned char prescaler) 
+{
     TCCR3B |= prescaler;
     TCNT3 = 0; // Start timer at 0.
     set_bit(TIMSK3, TOIE3); // Enable overflow interrupt.
@@ -109,12 +117,14 @@ void timer3_ovf(unsigned char prescaler) {
  *
  * @return void
 */
-void timer1_freq_Hz(uint32_t hz, unsigned char ocr) {
+void timer1_freq_Hz(uint32_t hz, unsigned char ocr) 
+{
 	uint32_t ocrValue;
     int prescale[] = { 1, 8, 64, 256, 1024};
     int i = 0;
 
-    do {
+    do 
+    {
         // ocr = (clk / (prescale * desiredFreq)) - 1
         ocrValue = (16000000 / (prescale[i] * hz)) - 1;
         i++;
@@ -123,26 +133,31 @@ void timer1_freq_Hz(uint32_t hz, unsigned char ocr) {
     TCCR1B |= i; // Set prescaler.
     set_bit(TCCR1B, WGM12); // Set CTC mode.
 
-    if (ocr == TIMER_OCR_A) {
+    if (ocr == TIMER_OCR_A) 
+    {
     	OCR1A = ocrValue; // Set compare A value.
     	set_bit(TIMSK1, OCIE1A); // Enable compare A interrupt.
 
-    } else if (ocr == TIMER_OCR_B) {
+    } else if (ocr == TIMER_OCR_B) 
+    {
     	OCR1B = ocrValue; // Set compare A value.
     	set_bit(TIMSK1, OCIE1B); // Enable compare B interrupt.
 
-    } else if (ocr == TIMER_OCR_C) {
+    } else if (ocr == TIMER_OCR_C) 
+    {
     	OCR1C = ocrValue; // Set compare A value.
     	set_bit(TIMSK1, OCIE1C); // Enable compare C interrupt.
     }
 }
 
-void timer3_freq_Hz(uint32_t hz, unsigned char ocr) {
+void timer3_freq_Hz(uint32_t hz, unsigned char ocr) 
+{
     uint32_t ocrValue;
     int prescale[] = { 1, 8, 64, 256, 1024};
     int i = 0;
 
-    do {
+    do 
+    {
         // ocr = (clk / (prescale * desiredFreq)) - 1
         ocrValue = (16000000 / (prescale[i] * hz)) - 1;
         i++;
@@ -151,15 +166,18 @@ void timer3_freq_Hz(uint32_t hz, unsigned char ocr) {
     TCCR3B |= i; // Set prescaler.
     set_bit(TCCR3B, WGM32); // Set CTC mode.
 
-    if (ocr == TIMER_OCR_A) {
+    if (ocr == TIMER_OCR_A) 
+    {
         OCR3A = ocrValue; // Set compare A value.
         set_bit(TIMSK3, OCIE3A); // Enable compare A interrupt.
 
-    } else if (ocr == TIMER_OCR_B) {
+    } else if (ocr == TIMER_OCR_B) 
+    {
         OCR3B = ocrValue; // Set compare A value.
         set_bit(TIMSK3, OCIE3B); // Enable compare B interrupt.
 
-    } else if (ocr == TIMER_OCR_C) {
+    } else if (ocr == TIMER_OCR_C) 
+    {
         OCR3C = ocrValue; // Set compare A value.
         set_bit(TIMSK3, OCIE3C); // Enable compare C interrupt.
     }
@@ -176,14 +194,16 @@ void timer3_freq_Hz(uint32_t hz, unsigned char ocr) {
  *
  * @return void
 */
-void timer1_freq_ms(uint16_t ms, unsigned char ocr) {
+void timer1_freq_ms(uint16_t ms, unsigned char ocr) 
+{
     uint16_t s = ms / 1000; // Interval in seconds
     uint32_t hz = 1 / s; // freq = 1 / period
 
     timer1_freq_Hz(hz, ocr);
 }
 
-void timer3_freq_ms(uint16_t ms, unsigned char ocr) {
+void timer3_freq_ms(uint16_t ms, unsigned char ocr) 
+{
     uint16_t s = ms / 1000; // Interval in seconds
     uint32_t hz = 1 / s; // freq = 1 / period
 
