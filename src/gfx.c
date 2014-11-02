@@ -1,7 +1,8 @@
 // Information ----------------------------------------------------------------
 
 /*	Library:		libTeensy20
- *	Purpose:		Graphics for Nokia 5110 LCD
+ *	Purpose:		Basic graphics functions for use with a single dimensional
+ *					array buffer.
  *	Author(s):		Shaun Karran
  *	Created:		October 2014
 */
@@ -11,14 +12,21 @@
 #include <stdint.h>
 #include <stdlib.h> // For abs()
 
-#include "../include/lcd_gfx.h"
-#include "../include/lcd_5110.h"
+#include "../include/gfx.h"
 #include "../include/bitwise.h"
+
+static uint16_t lcdX;
+static uint16_t lcdY;
 
 // Function Definitions -------------------------------------------------------
 
+void gfx_init(uint16_t xPixels, uint16_t yPixels) {
+	lcdX = xPixels;
+	lcdY = yPixels;
+}
+
 /*
- * Sets a pixel in the buffer at the (x, y) position.
+ * Sets/clears a pixel in the buffer at the (x, y) position.
  *
  * @param unsigned char x
  *      Horizontal position of the pixel.
@@ -35,30 +43,20 @@ void gfx_set_pixel(unsigned char x, unsigned char y, unsigned char* buffer)
 {
 	uint16_t bufferPosition;
 
-	bufferPosition = ((y / 8) * LCD_X) + x; // y / 8 finds the row. * 8 moves to the start of that row.
-	set_bit(buffer[bufferPosition], (y % 8));
+	if (x >= 0 && x < lcdX && y >= 0 && y < lcdY) {		// Check pixel location is allowed
+		bufferPosition = ((y / 8) * lcdX) + x;			// y / 8 finds row. * 8 moves to start of that row.
+		set_bit(buffer[bufferPosition], (y % 8));
+	}
 }
 
-/*
- * Clears a pixel in the buffer at the (x, y) position.
- *
- * @param unsigned char x
- *      Horizontal position of the pixel.
- *
- * @param unsigned char y
- *      Vertical position of the pixel.
- *
- * @param unsigned char* buffer
- *		Array of chars representing the screen.
- *
- * @return void
-*/
 void gfx_clr_pixel(unsigned char x, unsigned char y, unsigned char* buffer) 
 {
 	uint16_t bufferPosition;
 
-	bufferPosition = ((y / 8) * LCD_X) + x; // y / 8 finds the row. * 8 moves to the start of that row.
-	clr_bit(buffer[bufferPosition], (y % 8));
+	if (x >= 0 && x < lcdX && y >= 0 && y < lcdY) {		// Check pixel location is allowed
+		bufferPosition = ((y / 8) * lcdX) + x; 			// y / 8 finds row. * 8 moves to start of that row.
+		clr_bit(buffer[bufferPosition], (y % 8));
+	}
 }
 
 /*
@@ -81,8 +79,11 @@ unsigned char gfx_get_pixel(unsigned char x, unsigned char y, unsigned char* buf
 {
 	uint16_t bufferPosition;
 
-	bufferPosition = ((y / 8) * LCD_X) + x; // y / 8 finds the row. * 8 moves to the start of that row.
-	return get_bit(buffer[bufferPosition], (y % 8));
+	if (x >= 0 && x < lcdX && y >= 0 && y < lcdY) {		// Check pixel location is allowed
+		bufferPosition = ((y / 8) * lcdX) + x; 			// y / 8 finds row. * 8 moves to start of that row.
+		return get_bit(buffer[bufferPosition], (y % 8));
+	}
+	return -1;
 }
 
 /*

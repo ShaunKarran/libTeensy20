@@ -8,7 +8,7 @@
 #include "../include/ASCII_lib.h"
 #include "../include/bitwise.h"
 #include "../include/lcd_5110.h"
-#include "../include/lcd_gfx.h"
+#include "../include/gfx.h"
 #include "../include/timer.h"
 
 int main(void) {
@@ -24,6 +24,8 @@ int main(void) {
 
 
 	// lcd_gfx Test -----------------------------------------------------------
+	gfx_init(LCD_X, LCD_Y);
+
 	gfx_draw_line(3, 6, 65, 40, lcdBuffer);
 
 	lcd_display_buffer(lcdBuffer);
