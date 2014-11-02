@@ -11,6 +11,8 @@
 
 // Function Prototypes --------------------------------------------------------
 
+void gfx_init(uint16_t xPixels, uint16_t yPixels);
+
 void gfx_set_pixel(unsigned char x, unsigned char y, unsigned char* buffer);
 
 void gfx_clr_pixel(unsigned char x, unsigned char y, unsigned char* buffer);

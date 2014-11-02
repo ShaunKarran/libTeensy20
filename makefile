@@ -7,7 +7,7 @@ SOURCES =	test/test.c 	\
 			src/adc.c 		\
 			src/ASCII_lib.c \
 			src/lcd_5110.c 	\
-			src/lcd_gfx.c 	\
+			src/gfx.c 		\
 			src/timer.c 	\
 			
 MCU = atmega32u4
