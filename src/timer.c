@@ -1,15 +1,20 @@
+// Information ----------------------------------------------------------------
+
 /*	Library:		libTeensy20
  *	Purpose:		Setup timers
  *	Author(s):		Shaun Karran
  *	Created:		October 2014
- */
+*/
 
 // Includes -------------------------------------------------------------------
+
 #include <avr/io.h>
 #include <stdint.h>
 
 #include "../include/timer.h"
 #include "../include/bitwise.h"
+
+// Function Definitions -------------------------------------------------------
 
 /*
  * Enable timer0 with overflow interrupt

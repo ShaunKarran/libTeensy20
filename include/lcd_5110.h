@@ -1,3 +1,5 @@
+// Information ----------------------------------------------------------------
+
 /*	Library:		libTeensy20
  *	Purpose:		Drive Nokia 5110 LCD
  *	Author(s):		Shaun Karran
@@ -5,12 +7,14 @@
 */
 
 // Includes -------------------------------------------------------------------
+
 #include <stdint.h>
 
 #ifndef _lcd_5110_h
 #define _lcd_5110_h
 
 // Defines --------------------------------------------------------------------
+
 #define LCD_X 84
 #define LCD_Y 48
 #define LCD_PIXELS (LCD_X * LCD_Y)
@@ -43,6 +47,7 @@
 extern unsigned char lcdBuffer[LCD_BUFFER_SIZE];
 
 // Function Prototypes --------------------------------------------------------
+
 void lcd_init(unsigned char contrast);
 
 void lcd_clear(void);

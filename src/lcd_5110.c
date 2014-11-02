@@ -1,3 +1,5 @@
+// Information ----------------------------------------------------------------
+
 /*	Library:		libTeensy20
  *	Purpose:		Drive Nokia 5110 LCD
  *	Author(s):		Shaun Karran
@@ -5,6 +7,7 @@
 */
 
 // Includes -------------------------------------------------------------------
+
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <stdio.h>
@@ -14,6 +17,8 @@
 #include "../include/ASCII_lib.h"
 
 unsigned char lcdBuffer[LCD_BUFFER_SIZE];
+
+// Function Definitions -------------------------------------------------------
 
 /*
  * Configures the pins connected to the display.

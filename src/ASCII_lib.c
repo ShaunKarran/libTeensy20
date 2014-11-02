@@ -1,10 +1,13 @@
+// Information ----------------------------------------------------------------
+
 /*  Library:        libTeensy20
  *  Purpose:        ASCII font tables
  *  Author(s):      Shaun Karran
  *  Created:        October 2014
- */
+*/
 
 // Includes -------------------------------------------------------------------
+
 #include <avr/pgmspace.h>
 
 #include "../include/ASCII_lib.h"

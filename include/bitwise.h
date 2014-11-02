@@ -1,11 +1,15 @@
+// Information ----------------------------------------------------------------
+
 /*	Library:		libTeensy20
  *	Purpose:		Bitwise macros
  *	Author(s):		Shaun Karran
  *	Created:		October 2014
- */
+*/
 
 #ifndef _bitwise_h
 #define _bitwise_h
+
+// Macros ----------------------------------------------------------------
 
 #define set_bit(reg, pin) 		(reg |= (1 << pin))
 #define clr_bit(reg, pin) 		(reg &= ~(1 << pin))

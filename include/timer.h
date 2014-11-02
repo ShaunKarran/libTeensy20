@@ -1,13 +1,16 @@
+// Information ----------------------------------------------------------------
+
 /*	Library:		libTeensy20
  *	Purpose:		Setup timers
  *	Author(s):		Shaun Karran
  *	Created:		October 2014
- */
+*/
 
 #ifndef _timer_h
 #define _timer_h
 
 // Defines --------------------------------------------------------------------
+
 #define TIMER_PRESCALE_1	1
 #define TIMER_PRESCALE_8	2
 #define TIMER_PRESCALE_64	3
@@ -20,6 +23,7 @@
 #define TIMER_OCR_C 2
 
 // Function Prototypes --------------------------------------------------------
+
 void timer0_ovf_init(unsigned char prescaler);
 
 void timer0_freq_Hz(uint32_t hz, unsigned char ocr);
