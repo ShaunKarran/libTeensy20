@@ -44,8 +44,6 @@
 // LCD Buffer
 #define LCD_BUFFER_SIZE (LCD_PIXELS / 8)
 
-extern unsigned char lcdBuffer[LCD_BUFFER_SIZE];
-
 // Function Prototypes --------------------------------------------------------
 
 void lcd_init(unsigned char contrast);
@@ -58,7 +56,7 @@ void lcd_write_byte(unsigned char dc, unsigned char data);
 
 void lcd_print_char(char character);
 
-void lcd_print_str(char* string);
+void lcd_print_str(char* str);
 
 void lcd_print_int(int32_t value);
 

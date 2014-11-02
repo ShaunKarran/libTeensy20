@@ -10,19 +10,25 @@
 // Includes -------------------------------------------------------------------
 
 #include <stdint.h>
-#include <stdlib.h> // For abs()
+#include <stdlib.h>
 
 #include "../include/gfx.h"
 #include "../include/bitwise.h"
 
 static uint16_t lcdX;
 static uint16_t lcdY;
+static uint32_t gfxBufferSize;
+
+unsigned char* gfxBuffer;
 
 // Function Definitions -------------------------------------------------------
 
-void gfx_init(uint16_t xPixels, uint16_t yPixels) {
+void gfx_init(unsigned char** gfxBuffer, uint16_t xPixels, uint16_t yPixels) {
 	lcdX = xPixels;
 	lcdY = yPixels;
+	gfxBufferSize = lcdX * lcdY;
+
+	*gfxBuffer = malloc(sizeof(char) * gfxBufferSize);
 }
 
 /*

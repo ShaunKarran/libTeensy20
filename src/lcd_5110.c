@@ -16,8 +16,6 @@
 #include "../include/bitwise.h"
 #include "../include/ASCII_lib.h"
 
-unsigned char lcdBuffer[LCD_BUFFER_SIZE];
-
 // Function Definitions -------------------------------------------------------
 
 /*
@@ -173,13 +171,13 @@ void lcd_print_char(char character)
  *
  * @return void
 */
-void lcd_print_str(char* string) 
+void lcd_print_str(char* str) 
 {
 	int i = 0;
     
-    while (string[i] != '\0') 
+    while (str[i] != '\0') 
     {
-        lcd_print_char(string[i]);
+        lcd_print_char(str[i]);
         i++;
     }
 }
@@ -194,9 +192,9 @@ void lcd_print_str(char* string)
 */
 void lcd_print_int(int32_t value) 
 {
-	char string[11];
-    sprintf(string, "%ld", value);
-    lcd_print_str(string);
+	char str[11];
+    sprintf(str, "%ld", value);
+    lcd_print_str(str);
 }
 
 /*
