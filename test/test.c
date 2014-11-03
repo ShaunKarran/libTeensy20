@@ -24,11 +24,11 @@ int main(void) {
 
 
 	// lcd_gfx Test -----------------------------------------------------------
-	gfx_init(LCD_X, LCD_Y);
+	gfx_init(&gfxBuffer, LCD_X, LCD_Y);
 
-	gfx_draw_line(3, 6, 65, 40, lcdBuffer);
+	gfx_draw_line(3, 6, 65, 40, gfxBuffer);
 
-	lcd_display_buffer(lcdBuffer);
+	lcd_display_buffer(gfxBuffer);
 
 	while(1) { ; }
 

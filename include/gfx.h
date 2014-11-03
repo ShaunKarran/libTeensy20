@@ -9,9 +9,11 @@
 #ifndef _lcd_gfx_h
 #define _lcd_gfx_h
 
+extern unsigned char* gfxBuffer;
+
 // Function Prototypes --------------------------------------------------------
 
-void gfx_init(uint16_t xPixels, uint16_t yPixels);
+void gfx_init(unsigned char** gfxBuffer, uint16_t xPixels, uint16_t yPixels);
 
 void gfx_set_pixel(unsigned char x, unsigned char y, unsigned char* buffer);
 
