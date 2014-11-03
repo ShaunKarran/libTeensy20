@@ -9,6 +9,7 @@
 
 // Includes -------------------------------------------------------------------
 
+#include <avr/pgmspace.h>
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -23,6 +24,20 @@ unsigned char* gfxBuffer;
 
 // Function Definitions -------------------------------------------------------
 
+/*
+ * Initialises the display size and allocates the graphics buffer.
+ *
+ * @param unsigned char** gfx buffer
+ *      Pointer to the graphics buffer.
+ *
+ * @param uint16_t xPixels
+ *      Number of horizontal pixels.
+ *
+ * @param uint16_t yPixels
+ *      Number of vertical pixels.
+ *
+ * @return void
+*/
 void gfx_init(unsigned char** gfxBuffer, uint16_t xPixels, uint16_t yPixels) {
 	lcdX = xPixels;
 	lcdY = yPixels;
@@ -217,7 +232,18 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, uns
  * @return void
  *
 */
-void gfx_draw_sprite(unsigned char x, unsigned char y, unsigned char* buffer) 
+void gfx_draw_sprite(unsigned char* sprite, unsigned char x, unsigned char y, unsigned char* buffer) 
 {
 	// TODO
+	for (int i = 0; i < spriteWidth; i++)
+	{
+		for (int j = 0; j < spriteHeight; j++)
+		{
+			if (pgm_read_byte(&sprite))
+			{
+
+			}
+			gfx_set_pixel(x + i, y + j, buffer);
+		}
+	}
 }
