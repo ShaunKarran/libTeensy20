@@ -25,6 +25,6 @@ void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigne
 
 void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, unsigned char* buffer);
 
-void gfx_draw_sprite(unsigned char x, unsigned char y, unsigned char* buffer);
+void gfx_draw_sprite(unsigned char* sprite, unsigned char x, unsigned char y, unsigned char* buffer);
 
 #endif // _lcd_gfx_h

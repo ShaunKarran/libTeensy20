@@ -11,7 +11,7 @@ SOURCES =	test/test.c 	\
 			src/timer.c 	\
 			
 MCU = atmega32u4
-F_CPU = 16000000UL
+F_CPU = 8000000UL
 
 all: $(SOURCES)
 

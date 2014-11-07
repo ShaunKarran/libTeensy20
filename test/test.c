@@ -8,10 +8,13 @@
 #include "../include/ASCII_lib.h"
 #include "../include/bitwise.h"
 #include "../include/lcd_5110.h"
+#include "../include/global_defines.h"
 #include "../include/gfx.h"
 #include "../include/timer.h"
 
 int main(void) {
+
+	CPU_SPEED(CPU_8Mhz);
 
 	// lcd_5110 Test ----------------------------------------------------------
 	lcd_init(LCD_DEFAULT_CONTRAST);

@@ -235,15 +235,15 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, uns
 void gfx_draw_sprite(unsigned char* sprite, unsigned char x, unsigned char y, unsigned char* buffer) 
 {
 	// TODO
-	for (int i = 0; i < spriteWidth; i++)
-	{
-		for (int j = 0; j < spriteHeight; j++)
-		{
-			if (pgm_read_byte(&sprite))
-			{
+	// for (int i = 0; i < spriteWidth; i++)
+	// {
+	// 	for (int j = 0; j < spriteHeight; j++)
+	// 	{
+	// 		if (pgm_read_byte(&sprite))
+	// 		{
 
-			}
-			gfx_set_pixel(x + i, y + j, buffer);
-		}
-	}
+	// 		}
+	// 		gfx_set_pixel(x + i, y + j, buffer);
+	// 	}
+	// }
 }
