@@ -14,7 +14,7 @@
 
 int main(void) {
 
-	CPU_SPEED(CPU_8Mhz);
+	cpu_speed(CPU_8Mhz);
 
 	// lcd_5110 Test ----------------------------------------------------------
 	lcd_init(LCD_DEFAULT_CONTRAST);

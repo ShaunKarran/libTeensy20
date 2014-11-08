@@ -21,6 +21,6 @@
 
 // Macros ---------------------------------------------------------------------
 
-#define CPU_SPEED(clkspd) (CLKPR = 0x80, CLKPR = clkspd)
+#define cpu_speed(clkspd) (CLKPR = 0x80, CLKPR = clkspd)
 
 #endif // _global_defines_h
