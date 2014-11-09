@@ -14,8 +14,7 @@
  *
  * The first byte is the size of the x dimension (in pixels) of the sprite.
  * The second byte is the vertical size (in chars) of the sprite.
- * The bytes following the width and height, and before the null character
- * are the sprite itself.
+ * The bytes following the width and height are the sprite itself.
 */
 
 // Includes -------------------------------------------------------------------
@@ -32,8 +31,7 @@
 const unsigned char sprite_tank[] PROGMEM = 
 {
     0x05, 0x01,
-    0x06, 0x06, 0x0E, 0x06, 0x06,
-    '\0'
+    0x06, 0x06, 0x07, 0x06, 0x06
 };
 
 #endif //_SPRITES_H

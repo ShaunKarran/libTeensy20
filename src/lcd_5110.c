@@ -226,22 +226,4 @@ void lcd_display_buffer(unsigned char* buffer)
     {
         lcd_write_byte(LCD_DATA, buffer[i]);
     }
-
-    lcd_clear_buffer(buffer);
-}
-
-/*
- * Clears the buffer by writing all 0's.
- *
- * @param unsigned char* buffer
- *      Buffer to be cleared.
- *
- * @return void
-*/
-void lcd_clear_buffer(unsigned char* buffer) 
-{
-    for (int i = 0; i < LCD_BUFFER_SIZE; i++) 
-    {
-        buffer[i] = 0;
-    }
 }
