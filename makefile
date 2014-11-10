@@ -2,13 +2,13 @@ CFLAGS = -std=c99
 DEBUG_CFLAGS = -Wall $(CFLAGS)
 TARGET = bin/test.hex
 OBJECT = build/test.o
-SOURCES =	test/test.c 	\
+SOURCES =	src/test.c 	\
 							\
-			src/adc.c 		\
-			src/ASCII_lib.c \
-			src/lcd_5110.c 	\
-			src/gfx.c 		\
-			src/timer.c 	\
+			lib/adc.c 		\
+			lib/ASCII_lib.c \
+			lib/lcd_5110.c 	\
+			lib/gfx.c 		\
+			lib/timer.c 	\
 			
 MCU = atmega32u4
 F_CPU = 8000000UL
