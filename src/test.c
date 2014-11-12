@@ -40,6 +40,8 @@ int main(void) {
 	{
 		gfx_clear_buffer(gfxBuffer);
 
+		gfx_draw_sprite(sprite_smile, 30, 20, gfxBuffer);
+
 		gfx_draw_sprite(sprite_tank, TICK, 10, gfxBuffer);
 
 		lcd_display_buffer(gfxBuffer);
