@@ -13,20 +13,20 @@ extern unsigned char* gfxBuffer;
 
 // Function Prototypes --------------------------------------------------------
 
-void gfx_init(unsigned char** gfxBuffer, uint16_t xPixels, uint16_t yPixels);
+void gfx_init(uint16_t xPixels, uint16_t yPixels);
 
-void gfx_clear_buffer(unsigned char* buffer);
+void gfx_clear_buffer(void);
 
-void gfx_set_pixel(unsigned char x, unsigned char y, unsigned char* buffer);
+void gfx_set_pixel(unsigned char x, unsigned char y);
 
-void gfx_clr_pixel(unsigned char x, unsigned char y, unsigned char* buffer);
+void gfx_clr_pixel(unsigned char x, unsigned char y);
 
-unsigned char gfx_get_pixel(unsigned char x, unsigned char y, unsigned char* buffer);
+unsigned char gfx_get_pixel(unsigned char x, unsigned char y);
 
-void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, unsigned char* buffer);
+void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2);
 
-void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, unsigned char* buffer);
+void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius);
 
-void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char y, unsigned char* buffer);
+void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char y);
 
 #endif // _lcd_gfx_h

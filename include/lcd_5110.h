@@ -64,6 +64,4 @@ void lcd_print_float(float value);
 
 void lcd_display_buffer(unsigned char* buffer);
 
-void lcd_clear_buffer(unsigned char* buffer);
-
 #endif // _lcd_5110_h

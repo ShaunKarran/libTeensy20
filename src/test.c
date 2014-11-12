@@ -34,15 +34,15 @@ int main(void) {
 	// lcd_print_int(2123456789L);
 
 	// lcd_gfx Test -----------------------------------------------------------
-	gfx_init(&gfxBuffer, LCD_X, LCD_Y);
+	gfx_init(LCD_X, LCD_Y);
 
 	while(1)
 	{
-		gfx_clear_buffer(gfxBuffer);
+		gfx_clear_buffer();
 
-		gfx_draw_sprite(sprite_smile, 30, 20, gfxBuffer);
+		gfx_draw_sprite(sprite_smile, 30, 20);
 
-		gfx_draw_sprite(sprite_tank, TICK, 10, gfxBuffer);
+		gfx_draw_sprite(sprite_tank, TICK, 10);
 
 		lcd_display_buffer(gfxBuffer);
 	}

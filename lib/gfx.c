@@ -38,14 +38,14 @@ unsigned char* gfxBuffer;
  *
  * @return void
 */
-void gfx_init(unsigned char** buffer, uint16_t xPixels, uint16_t yPixels) {
+void gfx_init(uint16_t xPixels, uint16_t yPixels) {
 	lcdX = xPixels;
 	lcdY = yPixels;
 	gfxBufferSize = lcdX * (lcdY / 8);
 
-	*buffer = (unsigned char*)malloc(sizeof(char) * gfxBufferSize);
+	gfxBuffer = (unsigned char*)malloc(sizeof(char) * gfxBufferSize);
 
-	gfx_clear_buffer(*buffer);
+	gfx_clear_buffer();
 }
 
 /*
@@ -56,11 +56,11 @@ void gfx_init(unsigned char** buffer, uint16_t xPixels, uint16_t yPixels) {
  *
  * @return void
 */
-void gfx_clear_buffer(unsigned char* buffer) 
+void gfx_clear_buffer(void) 
 {
     for (int i = 0; i < gfxBufferSize; i++) 
     {
-        buffer[i] = 0;
+        gfxBuffer[i] = 0;
     }
 }
 
@@ -78,23 +78,23 @@ void gfx_clear_buffer(unsigned char* buffer)
  *
  * @return void
 */
-void gfx_set_pixel(unsigned char x, unsigned char y, unsigned char* buffer) 
+void gfx_set_pixel(unsigned char x, unsigned char y) 
 {
 	uint16_t bufferPosition;
 
 	if (x < lcdX && y < lcdY) {							// Check pixel location is allowed
 		bufferPosition = ((y / 8) * lcdX) + x;			// y / 8 finds row. * 8 moves to start of that row.
-		set_bit(buffer[bufferPosition], (y % 8));
+		set_bit(gfxBuffer[bufferPosition], (y % 8));
 	}
 }
 
-void gfx_clr_pixel(unsigned char x, unsigned char y, unsigned char* buffer) 
+void gfx_clr_pixel(unsigned char x, unsigned char y) 
 {
 	uint16_t bufferPosition;
 
 	if (x < lcdX && y < lcdY) {							// Check pixel location is allowed
 		bufferPosition = ((y / 8) * lcdX) + x; 			// y / 8 finds row. * 8 moves to start of that row.
-		clr_bit(buffer[bufferPosition], (y % 8));
+		clr_bit(gfxBuffer[bufferPosition], (y % 8));
 	}
 }
 
@@ -114,13 +114,13 @@ void gfx_clr_pixel(unsigned char x, unsigned char y, unsigned char* buffer)
  *		The state of the pixel (1 or 0)
  *
 */
-unsigned char gfx_get_pixel(unsigned char x, unsigned char y, unsigned char* buffer) 
+unsigned char gfx_get_pixel(unsigned char x, unsigned char y) 
 {
 	uint16_t bufferPosition;
 
 	if (x < lcdX && y < lcdY) {							// Check pixel location is allowed
 		bufferPosition = ((y / 8) * lcdX) + x; 			// y / 8 finds row. * 8 moves to start of that row.
-		return get_bit(buffer[bufferPosition], (y % 8));
+		return get_bit(gfxBuffer[bufferPosition], (y % 8));
 	}
 	return -1;
 }
@@ -146,7 +146,7 @@ unsigned char gfx_get_pixel(unsigned char x, unsigned char y, unsigned char* buf
  * @return void
  *
 */
-void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, unsigned char* buffer) 
+void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) 
 {
 	char dx = abs(x2 - x1);
 	char dy = abs(y2 - y1);
@@ -157,7 +157,7 @@ void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigne
 
 	while (1) 
 	{
-		gfx_set_pixel(x1, y1, buffer);
+		gfx_set_pixel(x1, y1);
 
 		if ((x1 == x2) && (y1 == y2))
 		{
@@ -197,7 +197,7 @@ void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigne
  * @return void
  *
 */
-void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, unsigned char* buffer) 
+void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius) 
 {
 	char xDist, yDist, error;
 
@@ -209,16 +209,16 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, uns
 	{
 		// Algorithm only draws a single octant. Each line draws a differnt octant.
 		// Draws the left and right 'sides' of the circle.
-		gfx_set_pixel(x + xDist, y + yDist, buffer);
-		gfx_set_pixel(x - xDist, y + yDist, buffer);
-		gfx_set_pixel(x + xDist, y - yDist, buffer);
-		gfx_set_pixel(x - xDist, y - yDist, buffer);
+		gfx_set_pixel(x + xDist, y + yDist);
+		gfx_set_pixel(x - xDist, y + yDist);
+		gfx_set_pixel(x + xDist, y - yDist);
+		gfx_set_pixel(x - xDist, y - yDist);
 
 		// Draws the top and bottom of the circle.
-		gfx_set_pixel(x + yDist, y + xDist, buffer);
-		gfx_set_pixel(x - yDist, y + xDist, buffer);
-		gfx_set_pixel(x + yDist, y - xDist, buffer);
-		gfx_set_pixel(x - yDist, y - xDist, buffer);
+		gfx_set_pixel(x + yDist, y + xDist);
+		gfx_set_pixel(x - yDist, y + xDist);
+		gfx_set_pixel(x + yDist, y - xDist);
+		gfx_set_pixel(x - yDist, y - xDist);
 
 		// Increment y ('fast direction') and determine if x should be incremented.
 		yDist++;
@@ -247,7 +247,7 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, uns
  * @return void
  *
 */
-void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char y, unsigned char* buffer) 
+void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char y) 
 {
 	int spriteWidth = pgm_read_byte(&sprite[0]);
 	int spriteHeight = pgm_read_byte(&sprite[1]);
@@ -261,7 +261,7 @@ void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char
 			{
 				if (get_bit(spriteByte, k))
 				{
-					gfx_set_pixel((x + j), (y + (i * 8) + k), buffer);
+					gfx_set_pixel((x + j), (y + (i * 8) + k));
 				}
 			}
 		}
