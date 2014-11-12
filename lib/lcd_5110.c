@@ -14,7 +14,7 @@
 
 #include "../include/lcd_5110.h"
 #include "../include/bitwise.h"
-#include "../include/ASCII_lib.h"
+#include "../assets/ASCII_lib.h"
 
 // Function Definitions -------------------------------------------------------
 

@@ -24,22 +24,22 @@
 
 // Function Prototypes --------------------------------------------------------
 
-void timer0_ovf_init(unsigned char prescaler);
+void timer0_ovf(unsigned char prescaler);
 
-void timer0_freq_Hz(uint32_t hz, unsigned char ocr);
+void timer0_freq_Hz(double hz, unsigned char ocr);
 
-void timer0_freq_ms(uint16_t ms, unsigned char ocr);
+void timer0_freq_ms(double ms, unsigned char ocr);
 
-void timer1_ovf_init(unsigned char prescaler);
+void timer1_ovf(unsigned char prescaler);
 
-void timer3_ovf_init(unsigned char prescaler);
+void timer3_ovf(unsigned char prescaler);
 
-void timer1_freq_Hz(uint32_t hz, unsigned char ocr);
+void timer1_freq_Hz(double hz, unsigned char ocr);
 
-void timer3_freq_Hz(uint32_t hz, unsigned char ocr);
+void timer3_freq_Hz(double hz, unsigned char ocr);
 
-void timer1_freq_ms(uint16_t ms, unsigned char ocr);
+void timer1_freq_ms(double ms, unsigned char ocr);
 
-void timer3_freq_ms(uint16_t ms, unsigned char ocr);
+void timer3_freq_ms(double ms, unsigned char ocr);
 
 #endif // _timer_h

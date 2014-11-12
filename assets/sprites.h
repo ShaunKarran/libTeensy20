@@ -24,11 +24,9 @@
 #ifndef _SPRITES_H
 #define _SPRITES_H
 
-#include "../include/sprite.h"
-
 // Sprites --------------------------------------------------------------------
 
-const unsigned char sprite_tank[] PROGMEM = 
+static const unsigned char sprite_tank[] PROGMEM = 
 {
     0x05, 0x01,
     0x06, 0x06, 0x07, 0x06, 0x06

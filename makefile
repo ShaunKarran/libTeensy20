@@ -5,7 +5,6 @@ OBJECT = build/test.o
 SOURCES =	src/test.c 	\
 							\
 			lib/adc.c 		\
-			lib/ASCII_lib.c \
 			lib/lcd_5110.c 	\
 			lib/gfx.c 		\
 			lib/timer.c 	\

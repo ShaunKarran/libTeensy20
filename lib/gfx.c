@@ -13,8 +13,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "../include/gfx.h"
 #include "../include/bitwise.h"
+#include "../include/gfx.h"
 
 static uint16_t lcdX;
 static uint16_t lcdY;
@@ -41,7 +41,7 @@ unsigned char* gfxBuffer;
 void gfx_init(unsigned char** buffer, uint16_t xPixels, uint16_t yPixels) {
 	lcdX = xPixels;
 	lcdY = yPixels;
-	gfxBufferSize = lcdX * lcdY;
+	gfxBufferSize = lcdX * (lcdY / 8);
 
 	*buffer = malloc(sizeof(char) * gfxBufferSize);
 
@@ -249,16 +249,17 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius, uns
 */
 void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char y, unsigned char* buffer) 
 {
-	int spriteWidth = sprite[0];
-	int spriteHeight = sprite[1];
+	int spriteWidth = pgm_read_byte(&sprite[0]);
+	int spriteHeight = pgm_read_byte(&sprite[1]);
 
 	for (int i = 0; i < spriteHeight; i++)
 	{
 		for (int j = 0; j < spriteWidth; j++)
 		{
+			char spriteByte = pgm_read_byte(&sprite[2 + (i * spriteWidth) + j]); // 2 + to move past width & height
 			for (int k = 0; k < 8; k++)
 			{
-				if (get_bit(pgm_read_byte(&sprite[2 + (i * spriteWidth) + j]), k)) // 2 + to move past width & height
+				if (get_bit(spriteByte, k))
 				{
 					gfx_set_pixel((x + j), (y + (i * 8) + k), buffer);
 				}
