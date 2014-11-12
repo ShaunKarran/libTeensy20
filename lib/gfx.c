@@ -43,7 +43,7 @@ void gfx_init(unsigned char** buffer, uint16_t xPixels, uint16_t yPixels) {
 	lcdY = yPixels;
 	gfxBufferSize = lcdX * (lcdY / 8);
 
-	*buffer = malloc(sizeof(char) * gfxBufferSize);
+	*buffer = (unsigned char*)malloc(sizeof(char) * gfxBufferSize);
 
 	gfx_clear_buffer(*buffer);
 }
