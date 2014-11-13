@@ -15,8 +15,8 @@
 
 // Defines --------------------------------------------------------------------
 
-#define SONIC_TRIGGER 	PB6
-#define SONIC_ECHO 		PB7
+#define SONIC_TRIGGER 	PC6
+#define SONIC_ECHO 		PC7
 #define SPD_OF_SND 		340 // m/s
 
 // Function Prototypes --------------------------------------------------------

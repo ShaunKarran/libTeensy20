@@ -12,6 +12,7 @@
 #include <util/delay.h>
 
 #include "../include/bitwise.h"
+#include "../include/sonic_sr04.h"
 #include "../include/timer.h"
 
 // Function Definitions -------------------------------------------------------
@@ -28,12 +29,12 @@
 */
 void sonic_init(void)
 {
-    uint32_t TIME = 0;
+    set_output(DDRC, SONIC_TRIGGER);
+    set_input(DDRC, SONIC_ECHO);
 
-    set_output(DDRB, SONIC_TRIGGER);
-    set_input(DDRB, SONIC_ECHO);
+    clr_bit(PORTC, SONIC_TRIGGER);
 
-    timer0_freq_ms(0.001, TIMER_OCR_A);
+    timer1_ovf(TIMER_PRESCALE_64);
 }
 
 /*
@@ -48,30 +49,20 @@ void sonic_init(void)
 */
 uint16_t sonic_dist_mm(void) 
 {
-    uint16_t echoStart;
-    uint16_t echoFinish;
-    uint16_t deltaTime;
-
-    TIME = 0;
+    double deltaTime;
 
     // Send trigger signal.
-    set_bit(PORTB, SONIC_TRIGGER);
+    set_bit(PORTC, SONIC_TRIGGER);
     _delay_us(10);
-    clr_bit(PORTB, SONIC_TRIGGER);
+    clr_bit(PORTC, SONIC_TRIGGER);
 
     // Wait for echo signal to start.
-    while (!get_bit(PINB, SONIC_ECHO)) { ; }
+    while (!get_bit(PINC, SONIC_ECHO)) { ; }
+    TCNT1 = 0;
 
     // Measure echo length.
-    echoStart = TIME;
-    while(get_bit(PINB, SONIC_ECHO)) { ; }
-    echoFinish = TIME;
-    deltaTime = echoFinish - echoStart;
+    while (get_bit(PINC, SONIC_ECHO) && TCNT1 < 2941) { ; }
+    deltaTime = TCNT1 * 0.000008; // TCNT1 counts up once every 8us.
 
-    return (deltaTime * SPD_OF_SND * 1000) / 2; // Divide by 2 because time is there and back again.
-}
-
-ISR(TIMER0_COMPA_vect)
-{
-    TIME++;
+    return (uint16_t)(deltaTime * 34000) / 2; // distance = (time(secs) * velocity(34000cm/s)) / 2
 }

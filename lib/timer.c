@@ -110,13 +110,9 @@ void timer0_freq_ms(double ms, unsigned char ocr)
 */
 void timer1_ovf(unsigned char prescaler) 
 {
-    cli();
-
 	TCCR1B |= prescaler;
     TCNT1 = 0; // Start timer at 0.
     set_bit(TIMSK1, TOIE1); // Enable overflow interrupt.
-
-    sei();
 }
 
 void timer3_ovf(unsigned char prescaler) 

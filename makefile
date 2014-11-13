@@ -1,13 +1,12 @@
 CFLAGS = -std=c99
 DEBUG_CFLAGS = -Wall $(CFLAGS)
-TARGET = bin/test.hex
-OBJECT = build/test.o
-SOURCES =	src/test.c 	\
-							\
-			lib/adc.c 		\
-			lib/lcd_5110.c 	\
-			lib/gfx.c 		\
-			lib/timer.c 	\
+TARGET = bin/sonic_test.hex
+OBJECT = build/sonic_test.o
+SOURCES =	src/sonic_test.c 	\
+								\
+			lib/lcd_5110.c 		\
+			lib/sonic_sr04.c 	\
+			lib/timer.c 		\
 			
 MCU = atmega32u4
 F_CPU = 8000000UL
