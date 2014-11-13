@@ -233,6 +233,67 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius)
 }
 
 /*
+ * Draws a char in the buffer.
+ *
+ * @param char character
+ *		Charactr to draw.
+ *
+ * @param const unsigned char font[][5]
+ *		Set of character sprites to use.
+ *
+ * @param unsigned char x
+ *      Horizontal position of the top left of the char.
+ *
+ * @param unsigned char y
+ *      Vertical position of the top left of the char.
+ *
+ * @return void
+ *
+*/
+void gfx_draw_char(char character, const unsigned char font[][5], unsigned char x, unsigned char y) 
+{
+	for (int i = 0; i < 5; i++)
+	{
+		for (int k = 0; k < 8; k++)
+		{
+			if (get_bit(pgm_read_byte(&font[character - 0x20][i]), k))
+			{
+				gfx_set_pixel(x + i, y + k);
+			}
+		}
+	}
+}
+
+/*
+ * Draws a string in the buffer.
+ *
+ * @param char* string
+ *		String to draw.
+ *
+ * @param const unsigned char font[][5]
+ *		Set of character sprites to use.
+ *
+ * @param unsigned char x
+ *      Horizontal position of the top left of the char of the first letter.
+ *
+ * @param unsigned char y
+ *      Vertical position of the top left of the char of the first letter.
+ *
+ * @return void
+ *
+*/
+void gfx_draw_string(char* str, const unsigned char font[][5], unsigned char x, unsigned char y) 
+{
+	int i = 0;
+
+	while (str[i] != '\0')
+	{
+		gfx_draw_char(str[i], font, x + (i * 6), y);
+		i++;
+	}
+}
+
+/*
  * Draws a sprite in the buffer.
  *
  * @param unsigned char x

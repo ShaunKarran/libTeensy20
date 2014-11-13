@@ -44,6 +44,10 @@ int main(void) {
 
 		gfx_draw_sprite(sprite_tank, TICK, 10);
 
+		gfx_draw_char('T', ASCII, 10, 35);
+
+		gfx_draw_string("Test.", ASCII, 60, TICK);
+
 		lcd_display_buffer(gfxBuffer);
 	}
 
