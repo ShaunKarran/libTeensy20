@@ -31,6 +31,8 @@ void gfx_draw_char(char character, const unsigned char font[][5], unsigned char 
 
 void gfx_draw_string(char* str, const unsigned char font[][5], unsigned char x, unsigned char y);
 
+void gfx_draw_int(int32_t value, const unsigned char font[][5], unsigned char x, unsigned char y);
+
 void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char y);
 
 #endif // _lcd_gfx_h

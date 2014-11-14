@@ -294,6 +294,31 @@ void gfx_draw_string(char* str, const unsigned char font[][5], unsigned char x, 
 }
 
 /*
+ * Draws an int in the buffer.
+ *
+ * @param int32_t value
+ *		Int to draw.
+ *
+ * @param const unsigned char font[][5]
+ *		Set of character sprites to use.
+ *
+ * @param unsigned char x
+ *      Horizontal position of the top left of the char of the left most number.
+ *
+ * @param unsigned char y
+ *      Vertical position of the top left of the char of the left most number.
+ *
+ * @return void
+ *
+*/
+void gfx_draw_int(int32_t value, const unsigned char font[][5], unsigned char x, unsigned char y)
+{
+	char str[11]; // int32 has max of 10 digits + 1 for null char.
+	sprintf(str, "%ld", value);
+	gfx_draw_string(str, font, x, y);
+}
+
+/*
  * Draws a sprite in the buffer.
  *
  * @param unsigned char x
