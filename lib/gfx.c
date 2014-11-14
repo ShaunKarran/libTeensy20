@@ -28,9 +28,6 @@ unsigned char* gfxBuffer;
 /*
  * Initialises the display size and allocates the graphics buffer.
  *
- * @param unsigned char** gfx buffer
- *      Pointer to the graphics buffer.
- *
  * @param uint16_t xPixels
  *      Number of horizontal pixels.
  *
@@ -52,9 +49,6 @@ void gfx_init(uint16_t xPixels, uint16_t yPixels) {
 /*
  * Clears the buffer by writing all 0's.
  *
- * @param unsigned char* buffer
- *      Buffer to be cleared.
- *
  * @return void
 */
 void gfx_clear_buffer(void) 
@@ -68,18 +62,15 @@ void gfx_clear_buffer(void)
 /*
  * Sets/clears a pixel in the buffer at the (x, y) position.
  *
- * @param unsigned char x
+ * @param uint16_t x
  *      Horizontal position of the pixel.
  *
- * @param unsigned char y
+ * @param uint16_t y
  *      Vertical position of the pixel.
- *
- * @param unsigned char* buffer
- *		Array of chars representing the screen.
  *
  * @return void
 */
-void gfx_set_pixel(unsigned char x, unsigned char y) 
+void gfx_set_pixel(uint16_t x, uint16_t y) 
 {
 	uint16_t bufferPosition;
 
@@ -89,7 +80,7 @@ void gfx_set_pixel(unsigned char x, unsigned char y)
 	}
 }
 
-void gfx_clr_pixel(unsigned char x, unsigned char y) 
+void gfx_clr_pixel(uint16_t x, uint16_t y) 
 {
 	uint16_t bufferPosition;
 
@@ -102,20 +93,17 @@ void gfx_clr_pixel(unsigned char x, unsigned char y)
 /*
  * Returns the state of a pixel in the buffer at the (x, y) position.
  *
- * @param unsigned char x
+ * @param uint16_t x
  *      Horizontal position of the pixel.
  *
- * @param unsigned char y
+ * @param uint16_t y
  *      Vertical position of the pixel.
- *
- * @param unsigned char* buffer
- *		Array of chars representing the screen.
  *
  * @return unsigned char
  *		The state of the pixel (1 or 0)
  *
 */
-unsigned char gfx_get_pixel(unsigned char x, unsigned char y) 
+unsigned char gfx_get_pixel(uint16_t x, uint16_t y) 
 {
 	uint16_t bufferPosition;
 
@@ -129,25 +117,22 @@ unsigned char gfx_get_pixel(unsigned char x, unsigned char y)
 /*
  * Draws a line in the buffer from (x1, y1) to (x2, y2).
  *
- * @param unsigned char x1
+ * @param uint16_t x1
  *      Horizontal position of the start of the line.
  *
- * @param unsigned char y1
+ * @param uint16_t y1
  *      Vertical position of the start of the line.
  *
- * @param unsigned char x2
+ * @param uint16_t x2
  *      Horizontal position of the end of the line.
  *
- * @param unsigned char y2
+ * @param uint16_t y2
  *      Vertical position of the end of the line.
- *
- * @param unsigned char* buffer
- *		Array of chars representing the screen.
  *
  * @return void
  *
 */
-void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) 
+void gfx_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) 
 {
 	char dx = abs(x2 - x1);
 	char dy = abs(y2 - y1);
@@ -183,22 +168,19 @@ void gfx_draw_line(unsigned char x1, unsigned char y1, unsigned char x2, unsigne
 /*
  * Draws a circle in the buffer centred at the point (x, y).
  *
- * @param unsigned char x
+ * @param uint16_t x
  *      Horizontal position of the centre of the circle.
  *
- * @param unsigned char y
+ * @param uint16_t y
  *      Vertical position of the centre of the circle.
  *
  * @param unsigned char radius
  *      Radius of the circle in pixels.
  *
- * @param unsigned char* buffer
- *		Array of chars representing the screen.
- *
  * @return void
  *
 */
-void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius) 
+void gfx_draw_circle(uint16_t x, uint16_t y, unsigned char radius) 
 {
 	char xDist, yDist, error;
 
@@ -242,16 +224,16 @@ void gfx_draw_circle(unsigned char x, unsigned char y, unsigned char radius)
  * @param const unsigned char font[][5]
  *		Set of character sprites to use.
  *
- * @param unsigned char x
+ * @param uint16_t x
  *      Horizontal position of the top left of the char.
  *
- * @param unsigned char y
+ * @param uint16_t y
  *      Vertical position of the top left of the char.
  *
  * @return void
  *
 */
-void gfx_draw_char(char character, const unsigned char font[][5], unsigned char x, unsigned char y) 
+void gfx_draw_char(char character, const unsigned char font[][5], uint16_t x, uint16_t y) 
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -274,16 +256,16 @@ void gfx_draw_char(char character, const unsigned char font[][5], unsigned char 
  * @param const unsigned char font[][5]
  *		Set of character sprites to use.
  *
- * @param unsigned char x
+ * @param uint16_t x
  *      Horizontal position of the top left of the char of the first letter.
  *
- * @param unsigned char y
+ * @param uint16_t y
  *      Vertical position of the top left of the char of the first letter.
  *
  * @return void
  *
 */
-void gfx_draw_string(char* str, const unsigned char font[][5], unsigned char x, unsigned char y) 
+void gfx_draw_string(char* str, const unsigned char font[][5], uint16_t x, uint16_t y) 
 {
 	int i = 0;
 
@@ -303,16 +285,16 @@ void gfx_draw_string(char* str, const unsigned char font[][5], unsigned char x, 
  * @param const unsigned char font[][5]
  *		Set of character sprites to use.
  *
- * @param unsigned char x
+ * @param uint16_t x
  *      Horizontal position of the top left of the char of the left most number.
  *
- * @param unsigned char y
+ * @param uint16_t y
  *      Vertical position of the top left of the char of the left most number.
  *
  * @return void
  *
 */
-void gfx_draw_int(int32_t value, const unsigned char font[][5], unsigned char x, unsigned char y)
+void gfx_draw_int(int32_t value, const unsigned char font[][5], uint16_t x, uint16_t y)
 {
 	char str[11]; // int32 has max of 10 digits + 1 for null char.
 	sprintf(str, "%ld", value);
@@ -322,19 +304,16 @@ void gfx_draw_int(int32_t value, const unsigned char font[][5], unsigned char x,
 /*
  * Draws a sprite in the buffer.
  *
- * @param unsigned char x
+ * @param uint16_t x
  *      Horizontal position of the centre of the circle.
  *
- * @param unsigned char y
+ * @param uint16_t y
  *      Vertical position of the centre of the circle.
- *
- * @param unsigned char* buffer
- *		Array of chars representing the screen.
  *
  * @return void
  *
 */
-void gfx_draw_sprite(const unsigned char* sprite, unsigned char x, unsigned char y) 
+void gfx_draw_sprite(const unsigned char* sprite, uint16_t x, uint16_t y) 
 {
 	int spriteWidth = pgm_read_byte(&sprite[0]);
 	int spriteHeight = pgm_read_byte(&sprite[1]);

@@ -15,14 +15,14 @@
 #include "../assets/sprites.h"
 #include "../include/timer.h"
 
-volatile char TICK = 0;
+volatile uint16_t TICK = 0;
 
 int main(void) {
 
 	cpu_speed(CPU_8Mhz);
 
 	//timer Test --------------------------------------------------------------
-	timer1_freq_ms(250, TIMER_OCR_A);
+	timer1_freq_ms(20, TIMER_OCR_A);
 
 	//lcd_5110 Test -----------------------------------------------------------
 	lcd_init(LCD_DEFAULT_CONTRAST);
