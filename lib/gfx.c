@@ -11,6 +11,7 @@
 
 #include <avr/pgmspace.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "../include/bitwise.h"
