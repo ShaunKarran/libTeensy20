@@ -14,7 +14,7 @@
 
 #include "../include/lcd_5110.h"
 #include "../include/bitwise.h"
-#include "../assets/ASCII_lib.h"
+//#include "../assets/ASCII_lib.h"
 
 // Function Definitions -------------------------------------------------------
 
@@ -154,14 +154,14 @@ void lcd_write_byte(unsigned char dc, unsigned char data)
  *
  * @return void
 */
-void lcd_print_char(char character) 
-{
-	for (int i = 0; i < 5; i++) 
-    {
-        lcd_write_byte(LCD_DATA, pgm_read_byte(&ASCII[character - 0x20][i]));
-    }
-    lcd_write_byte(LCD_DATA, 0x00); // Empty line between characters.
-}
+// void lcd_print_char(char character) 
+// {
+// 	for (int i = 0; i < 5; i++) 
+//     {
+//         lcd_write_byte(LCD_DATA, pgm_read_byte(&ASCII[character - 0x20][i]));
+//     }
+//     lcd_write_byte(LCD_DATA, 0x00); // Empty line between characters.
+// }
 
 /*
  * Prints a string to the display at the cursors current location.
@@ -171,16 +171,16 @@ void lcd_print_char(char character)
  *
  * @return void
 */
-void lcd_print_str(char* str) 
-{
-	int i = 0;
+// void lcd_print_str(char* str) 
+// {
+// 	int i = 0;
     
-    while (str[i] != '\0') 
-    {
-        lcd_print_char(str[i]);
-        i++;
-    }
-}
+//     while (str[i] != '\0') 
+//     {
+//         lcd_print_char(str[i]);
+//         i++;
+//     }
+// }
 
 /*
  * Prints a long int to the display at the cursors current location.
@@ -190,12 +190,12 @@ void lcd_print_str(char* str)
  *
  * @return void
 */
-void lcd_print_int(int32_t value) 
-{
-	char str[11];
-    sprintf(str, "%ld", value);
-    lcd_print_str(str);
-}
+// void lcd_print_int(int32_t value) 
+// {
+// 	char str[11];
+//     sprintf(str, "%ld", value);
+//     lcd_print_str(str);
+// }
 
 /*
  * Prints a float to the display at the cursors current location.
@@ -205,10 +205,10 @@ void lcd_print_int(int32_t value)
  *
  * @return void
 */
-void lcd_print_float(float value) 
-{
-	// TODO
-}
+// void lcd_print_float(float value) 
+// {
+// 	// TODO
+// }
 
 /*
  * Sends the contents of the buffer to the display and clears the buffer.

@@ -1,36 +1,60 @@
+# Set cpu speed to 8000000, 16000000(overclock) Hz.
+CPU_SPEED = 8000000
+
+AVRFLAGS = -mmcu=atmega32u4 -Os -DF_CPU=$(CPU_SPEED)
+
+# Flags for both C and C++.
+CXXFLAGS = -I./src -I./include
+
+# Flags for C only.
 CFLAGS = -std=c99
-DEBUG_CFLAGS = -Wall $(CFLAGS)
-TARGET = bin/test.hex
-OBJECT = build/test.o
-SOURCES =	src/test.c 	\
-								\
-			lib/gfx.c 			\
-			lib/lcd_5110.c 		\
-			lib/timer.c 		\
-			
-MCU = atmega32u4
-F_CPU = 8000000UL
 
-all: $(SOURCES)
+# Flags for C++ only. Use second if first doesnt work.
+CPPFLAGS = -std=c++11
+#CPPFLAGS = -std=c++0x
 
-	@avr-gcc $(CFLAGS) -mmcu=$(MCU) -Os -DF_CPU=$(F_CPU) $(SOURCES) -o $(OBJECT)
-	@avr-objcopy -O ihex $(OBJECT) $(TARGET)
+# Compilers
+CC = avr-gcc
+CPP = avr-g++
+OBJCOPY = avr-objcpy
 
-	@echo "\nBuild Complete.\n"
+# Useful directories.
+TARGETDIR = bin
+BUILDDIR = build
+SOURCEDIR = src
 
-debug: $(SOURCES)
+# Sources files separated by language.
+CFILES = $(wildcard $(SOURCEDIR)/*.c)
+CPPFILES = $(wildcard $(SOURCEDIR)/*.cpp)
 
-	@avr-gcc $(DEBUG_CFLAGS) -mmcu=$(MCU) -Os -DF_CPU=$(F_CPU) $(SOURCES) -o $(OBJECT)
-	@avr-objcopy -O ihex $(OBJECT) $(TARGET)
+# List of source files with file type changed to .o
+SOURCES = $(CFILES:.c=.o) $(CPPFILES:.cpp=.o)
 
-	@echo "\nDebug Build Complete.\n"
+# List of object files for each source file.
+OBJS = $(foreach src,$(SOURCES),$(BUILDDIR)/$(notdir $(src)))
+
+all: test
+	@echo "$(CFILES)"
+	@echo "$(OBJS)"
+
+test: $(OBJS)
+	@echo "This is where .hex is created."
+	@#@ld -r $(OBJS) -o test.o
+	@#@avr-objcopy $(OBJS) -O ihex $(TARGETDIR)/test.hex
+
+$(BUILDDIR)/%.o: $(SOURCEDIR)/%.c
+	@echo "Building $< into $@"
+	$(CC) $(AVRFLAGS) $(CXXFLAGS) $(CFLAGS) -c $< -o $@ 
+
+# $(TARGETDIR).hex: %.hex
+
+# 	@echo "\nCreating .hex file...\n"
+
+# 	@avr-objcopy -O ihex $(OBJS) $(TARGETDIR).hex
 
 clean:
 
-	@rm $(OBJECT)
-	@rm $(TARGET)
+	@rm $(OBJS)
+	#@rm $(TARGETDIR).hex
 
-	@echo "\n$(OBJECT) Removed.\n$(TARGET) Removed.\n"
-
-# Use -I to include librarys from multiple directories.
-# Starting a line with @ will stop it from echoing in the console.
+	@echo "\nObjects and targets removed.\n"
