@@ -39,8 +39,9 @@ all: test
 
 test: $(OBJS)
 	@echo "This is where .hex is created."
-	@#@ld -r $(OBJS) -o test.o
-	@#@avr-objcopy $(OBJS) -O ihex $(TARGETDIR)/test.hex
+	#ld -r $(OBJS) -o test.o
+	$(CC) -r $(OBJS) -o bin/test.elf
+	avr-objcopy bin/test.elf -O ihex $(TARGETDIR)/test.hex
 
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.c
 	@echo "Building $< into $@"
@@ -54,7 +55,7 @@ $(BUILDDIR)/%.o: $(SOURCEDIR)/%.c
 
 clean:
 
-	@rm $(OBJS)
-	#@rm $(TARGETDIR).hex
+	rm $(OBJS)
+	rm $(TARGETDIR)/test.hex
 
-	@echo "\nObjects and targets removed.\n"
+	@echo "Objects and targets removed."
