@@ -171,16 +171,16 @@ void lcd_write_byte(unsigned char dc, unsigned char data)
  *
  * @return void
 */
-// void lcd_print_str(char* str) 
-// {
-// 	int i = 0;
+void lcd_print_str(char* str) 
+{
+	int i = 0;
     
-//     while (str[i] != '\0') 
-//     {
-//         lcd_print_char(str[i]);
-//         i++;
-//     }
-// }
+    while (str[i] != '\0') 
+    {
+        lcd_print_char(str[i]);
+        i++;
+    }
+}
 
 /*
  * Prints a long int to the display at the cursors current location.
@@ -190,12 +190,12 @@ void lcd_write_byte(unsigned char dc, unsigned char data)
  *
  * @return void
 */
-// void lcd_print_int(int32_t value) 
-// {
-// 	char str[11];
-//     sprintf(str, "%ld", value);
-//     lcd_print_str(str);
-// }
+void lcd_print_int(int32_t value) 
+{
+	char str[11];
+    sprintf(str, "%ld", value);
+    lcd_print_str(str);
+}
 
 /*
  * Prints a float to the display at the cursors current location.
