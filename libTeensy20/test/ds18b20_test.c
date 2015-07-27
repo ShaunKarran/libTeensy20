@@ -19,7 +19,7 @@ int main(void) {
 	lcd_init(LCD_DEFAULT_CONTRAST);
 
 	set_output(DDRD, PD6);
-	set_bit(PORT, PD6);
+	set_bit(PORTD, PD6);
 
 	while(1)
 	{
@@ -37,10 +37,10 @@ int main(void) {
 				lcd_print_int(tempurature);
 				if (tempurature < 21)
 				{
-					set_bit(PORTB, PB6);
+					set_bit(PORTD, PD6);
 				} else
 				{
-					clr_bit(PORTB, PB6);
+					clr_bit(PORTD, PD6);
 				}
 			} else
 			{
