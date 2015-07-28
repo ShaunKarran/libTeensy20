@@ -6,6 +6,7 @@
 
 #include <avr/io.h>
 #include <stdint.h>
+#include <util/delay.h>
 
 #include "../include/bitwise.h"
 #include "../include/ds18b20.h"
@@ -18,30 +19,30 @@ int main(void) {
 	cpu_speed(CPU_8Mhz);
 	lcd_init(LCD_DEFAULT_CONTRAST);
 
-	set_output(DDRD, PD6);
-	set_bit(PORTD, PD6);
-
 	while(1)
 	{
+		lcd_goto(0, 0);
+
 		if(ds18_reset())
 		{
 			ds18_write_byte(0xCC);
 			ds18_write_byte(0x44);
-			while (ds18_read_byte() == 0) { ; }
+			while (ds18_read_byte() == 0)
+			{
+				lcd_goto(0, 0);
+				lcd_print_str("Converting...");
+				lcd_clear();
+			}
 			if (ds18_reset())
 			{
 				ds18_write_byte(0xCC);
 				ds18_write_byte(0xBE);
-				tempurature = ds18_read_byte();
-				tempurature = ds18_read_byte() << 8;
-				lcd_print_int(tempurature);
-				if (tempurature < 21)
-				{
-					set_bit(PORTD, PD6);
-				} else
-				{
-					clr_bit(PORTD, PD6);
-				}
+				// tempurature = ds18_read_byte();
+				// tempurature |= ds18_read_byte() << 8;
+				// lcd_print_int(tempurature);
+				lcd_print_int(ds18_read_byte());
+				lcd_goto(0, 1);
+				lcd_print_int(ds18_read_byte());
 			} else
 			{
 				lcd_print_str("Reset 2 Failed");
@@ -50,6 +51,8 @@ int main(void) {
 		{
 			lcd_print_str("Reset Failed");
 		}
+
+		lcd_clear();
 	}
 
 	return 0;

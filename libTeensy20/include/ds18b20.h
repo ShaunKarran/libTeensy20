@@ -11,10 +11,12 @@
 
 // Defines --------------------------------------------------------------------
 
-// Change to which ever pin the sensor is connected to.
-#define PIN	PB1
-// Change to DDR register for the given pin.
-#define REG DDRB
+// Change to which ever pin the sensor is connected to
+#define BUS	PB7
+// Change to register for the given pin (change just the last letter)
+#define DDR DDRB
+#define PORT PORTB
+#define PIN PINB
 
 // Command set - Can be sent using write_byte
 #define SKIP_ROM 	0xCC
