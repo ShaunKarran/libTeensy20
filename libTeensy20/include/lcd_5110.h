@@ -15,10 +15,12 @@
 
 // Defines --------------------------------------------------------------------
 
+// Display Dimensions
 #define LCD_X 84
 #define LCD_Y 48
 #define LCD_PIXELS (LCD_X * LCD_Y)
 
+// Pins. Change to suit physical implementation.
 #define LCD_SCLK PF7	// Serial clock input
 #define LCD_SDIN PB6	// Serial Data Input, sampled on rising edge of SCLK
 #define LCD_DC PB5		// Tells the LCD if sending DATA or COMMAND
