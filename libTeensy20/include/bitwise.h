@@ -11,13 +11,13 @@
 
 // Macros ----------------------------------------------------------------
 
-#define set_bit(reg, pin) 		(reg |= (1 << pin))
-#define clr_bit(reg, pin) 		(reg &= ~(1 << pin))
-#define tog_bit(reg, pin)		(reg ^= (1 << pin))
-#define get_bit(reg, pin) 		(reg & (1 << pin))
+#define set_bit(reg, bit) 		(reg |= (1 << bit))
+#define clr_bit(reg, bit) 		(reg &= ~(1 << bit))
+#define tog_bit(reg, bit)		(reg ^= (1 << bit))
+#define get_bit(reg, bit) 		(reg & (1 << bit))
 
 // For data direction registers.
-#define set_output(reg, pin)	(reg |= (1 << pin))
-#define set_input(reg, pin)		(reg &= ~(1 << pin))
+#define set_output(reg, bit)	(reg |= (1 << bit))
+#define set_input(reg, bit)		(reg &= ~(1 << bit))	
 
 #endif // _bitwise_h
